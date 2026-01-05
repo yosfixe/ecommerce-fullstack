@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('name',100);
+            $table->text('description')->nullable();
+            $table->date('production_date');
+            $table->string('type',100);
+            $table->string('picture')->nullable();
+            $table->unsignedBigInteger('cat_id')->foreignKey('cat_id')->references('id')->on('categories');
+            $table->timestamps();
+        });
+        // Schema::create('cache', function (Blueprint $table) {
+        //     $table->string('key')->primary();
+        //     $table->mediumText('value');
+        //     $table->integer('expiration');
+        // });
+
+        // Schema::create('cache_locks', function (Blueprint $table) {
+        //     $table->string('key')->primary();
+        //     $table->string('owner');
+        //     $table->integer('expiration');
+        // });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        //
+    }
+};
